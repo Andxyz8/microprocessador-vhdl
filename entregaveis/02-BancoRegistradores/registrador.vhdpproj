@@ -1,0 +1,11 @@
+﻿<Project>
+  <ItemGroup>
+    <File Include="banco_registradores.vhd" />
+    <File Include="main.vhd" />
+    <File Include="main_tb.vhd" />
+    <File Include="mux.vhd" />
+    <File Include="registrador_16bits.vhd" />
+    <File Include="ula.vhd" />
+  </ItemGroup>
+  <PropertyGroup />
+</Project>
