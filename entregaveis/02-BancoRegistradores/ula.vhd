@@ -26,9 +26,8 @@ begin
              "0000000000000000";
 
     saida_bool <= '1' when (inA > inB) and seletor = "10" else
-    '1' when (inA /= inB) and seletor = "11" else
-    
-    '0';
+                   '1' when (inA /= inB) and seletor = "11" else
+                  '0';
     
 end architecture;
 

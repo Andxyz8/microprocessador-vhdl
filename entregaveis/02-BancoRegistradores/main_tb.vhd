@@ -79,19 +79,23 @@ begin
         ULAsrc <= '1';
         seletor <= "00";
         
-        top <= "0000000000000101";
-        select_reg_write <= "001";
-        select_reg_read1 <= "000";
+        -- addi $1 $0 cte
+        top <= "0000000000000101"; -- 5
+        select_reg_write <= "001"; -- $1
+        select_reg_read1 <= "000"; -- $0
         
         wait for 100 ns;
-        top <= "0000000000001101";
-        select_reg_write <= "010";
+        -- addi $2 $0 cte
+        top <= "0000000000001101"; -- 13
+        select_reg_write <= "010"; --$2
         
         wait for 100 ns;
         ULAsrc <= '0';
-        select_reg_read1 <= "001";
-        select_reg_read2 <= "010";
-        select_reg_write <= "011";
+        
+        -- add $3 $1 $2
+        select_reg_read1 <= "001"; -- $1
+        select_reg_read2 <= "010"; -- $2
+        select_reg_write <= "011"; -- $3
         
         wait for 100 ns;
         wr_en <= '0';

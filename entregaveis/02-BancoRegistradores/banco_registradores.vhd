@@ -53,6 +53,8 @@ begin
     wr_en6 <='1' when select_write = "110" and wr_en='1' else '0';
     wr_en7 <='1' when select_write = "111" and wr_en='1' else '0';
     
+    
+    
     data_read1 <= data_out0 when select_read1 = "000" else
     data_out1 when select_read1 = "001" else
     data_out2 when select_read1 = "010" else
