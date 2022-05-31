@@ -1,39 +1,15 @@
-<?xml version="1.0"?>
-<ProjectRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Header>UC</Header>
-  <Items xsi:type="ProjectFileVHDL">
-    <Header>maq_estados.vhd</Header>
-  </Items>
-  <Items xsi:type="ProjectFileVHDL">
-    <Header>maq_estados_tb.vhd</Header>
-  </Items>
-  <Items xsi:type="ProjectFileVHDL">
-    <Header>pc_main.vhd</Header>
-  </Items>
-  <Items xsi:type="ProjectFileVHDL">
-    <Header>pc_main_tb.vhd</Header>
-  </Items>
-  <Items xsi:type="ProjectFileVHDL">
-    <Header>registrador_7bits.vhd</Header>
-  </Items>
-  <Items xsi:type="ProjectFileVHDL">
-    <Header>registrador_7bits_tb.vhd</Header>
-  </Items>
-  <Items xsi:type="ProjectFileVHDL">
-    <Header>rom.vhd</Header>
-  </Items>
-  <Items xsi:type="ProjectFileVHDL">
-    <Header>rom_tb.vhd</Header>
-  </Items>
-  <CruviHSExtensions>
-    <string xsi:nil="true" />
-  </CruviHSExtensions>
-  <CruviLSExtensions>
-    <string xsi:nil="true" />
-    <string xsi:nil="true" />
-    <string xsi:nil="true" />
-    <string xsi:nil="true" />
-  </CruviLSExtensions>
-  <IOVoltage>0</IOVoltage>
-  <UseShield>false</UseShield>
-</ProjectRoot>
+﻿<Project>
+  <ItemGroup>
+    <File Include="maq_estados.vhd" />
+    <File Include="maq_estados_tb.vhd" />
+    <File Include="pc_main.vhd" />
+    <File Include="pc_main_tb.vhd" />
+    <File Include="program_counter.vhd" />
+    <File Include="program_counter_tb.vhd" />
+    <File Include="proto_uc.vhd" />
+    <File Include="proto_uc_tb.vhd" />
+    <File Include="rom.vhd" />
+    <File Include="rom_tb.vhd" />
+  </ItemGroup>
+  <PropertyGroup />
+</Project>

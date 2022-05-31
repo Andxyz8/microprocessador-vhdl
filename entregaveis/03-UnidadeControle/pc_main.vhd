@@ -10,7 +10,7 @@ entity pc_main is
         wr_en           : in std_logic;
         data_i          : in unsigned (6 downto 0);
         data_o          : out unsigned (6 downto 0);
-        top_level         : out unsigned (17 downto 0)
+        top_level       : out unsigned (17 downto 0)
     );
 
 end entity pc_main;
@@ -37,11 +37,11 @@ architecture a_pc_main of pc_main is
     component registrador_7bits is
         port
         (
-            clk      : IN std_logic ;
-            rst      : IN std_logic ;
-            wr_en    : IN std_logic ;
+            clk     : IN std_logic ;
+            rst     : IN std_logic ;
+            wr_en   : IN std_logic ;
             data_i  : IN unsigned (6 downto 0);
-            data_o : OUT unsigned (6 downto 0)
+            data_o  : OUT unsigned (6 downto 0)
         );
     end component;
     
@@ -50,7 +50,7 @@ architecture a_pc_main of pc_main is
     signal dado             : unsigned (17 downto 0);
     signal operation_code   : unsigned (3 downto 0);
     signal estado_s         : std_logic;
-    signal jump          : std_logic;
+    signal jump             : std_logic;
     
 begin
     
@@ -77,13 +77,9 @@ begin
         data_o  => data_o
     );
     
-    saida <=    dado(6 downto 0)
-                when
-                    jump = '1' and wr_en = '1' and rising_edge(clk) and estado_s = '1'
+    saida <=    dado(6 downto 0) when jump = '1' and wr_en = '1' and rising_edge(clk) and estado_s = '1'
                 else
-                    saida + 1
-                when 
-                    wr_en = '1' and rising_edge(clk) and estado_s = '1'
+                    saida + 1 when wr_en = '1' and rising_edge(clk) and estado_s = '1'
                 else
                     saida;
 

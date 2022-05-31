@@ -1,38 +1,39 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
 
-entity rom is
-    port
+ENTITY rom IS
+    PORT
     (
-        clk : in std_logic;
-        endereco : in unsigned (6 downto 0);
-        dado : out unsigned (17 downto 0)
+        clk     : IN STD_LOGIC;
+        address : IN UNSIGNED (6 DOWNTO 0); -- Verificar a quantidade exata depois
+        data    : OUT UNSIGNED (14 DOWNTO 0)
     );
-end entity;
+END ENTITY;
 
-architecture a_rom of rom is
-    type mem is array (0 to 127) of unsigned(17 downto 0);
-    constant conteudo_rom : mem := (
-        0   => "000000000000000000",
-        1   => "000000000000000001",
-        2   => "000000000000000010",
-        3   => "000000000000000011",
-        4   => "000000000000000100",
-        5   => "000000000000000101",
-        6   => "000000000000000110",
-        7   => "000000000000000111",
-        8   => "000000000000001000",
-        9   => "000000000000001001",
-        10   => "000000000000001010",
-        others => (others => '0')
+ARCHITECTURE a_rom OF rom IS
+    TYPE mem IS ARRAY (0 TO 127) OF UNSIGNED(14 DOWNTO 0);
+    CONSTANT conteudo_rom : mem := (
+        0       => "000000000000000",
+        1       => "000000011000001",
+        2       => "001000000001010",
+        3       => "000000001100011",
+        4       => "000000000000100",
+        5       => "000000000100101",
+        6       => "000000000000110",
+        7       => "000000011000111",
+        8       => "000111111101000",
+        9       => "001100000001001",
+        10      => "001111000001010",
+        71      => "000111001000111",
+        OTHERS  => (OTHERS => '0')
     );
     
-begin
-    process(clk) begin
-        if(rising_edge(clk)) then
-            dado <= conteudo_rom(to_integer(endereco));
-        end if;
-    end process;
+BEGIN
+    PROCESS(clk) BEGIN
+        IF(rising_edge(clk)) THEN
+            data <= conteudo_rom(TO_INTEGER(address));
+        END IF;
+    END PROCESS;
 
-end architecture a_rom;
+END ARCHITECTURE a_rom;

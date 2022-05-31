@@ -1,27 +1,28 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
 
-entity rom_tb is
 
-end entity rom_tb;
+ENTITY rom_tb IS
 
-architecture a_rom_tb of rom_tb is
+END ENTITY rom_tb;
+
+ARCHITECTURE a_rom_tb of rom_tb is
     
-    component rom is
-        port
+    COMPONENT rom IS
+        PORT
         (
-            clk      : IN std_logic ;
-            endereco : IN unsigned (6 downto 0);
-            dado     : OUT unsigned (17 downto 0)
+            clk      : IN STD_LOGIC ;
+            endereco : IN UNSIGNED (6 DOWNTO 0);
+            dado     : OUT UNSIGNED (14 DOWNTO 0)
         );
-    end component;
+    END COMPONENT;
     
-    signal endereco : unsigned(6 downto 0);
-    signal dado     : unsigned (17 downto 0);
-    constant period_time    : time := 100 ns;   --escolha do período para o clock
-    signal finished         : std_logic := '0';
-    signal clk, rst       : std_logic;
+    SIGNAL endereco : UNSIGNED(6 DOWNTO 0);
+    SIGNAL dado     : UNSIGNED (14 DOWNTO 0);
+    CONSTANT period_time    : TIME := 100 ns;   --escolha do período para o clock
+    SIGNAL finished         : STD_LOGIC := '0';
+    SIGNAL clk, rst       : STD_LOGIC;
     
 begin
     uut: rom port map
@@ -58,7 +59,7 @@ begin
     end process clk_proc;
     
     
-    process begin
+    PROCESS BEGIN
         wait for 200 ns;
         
         endereco <= "0000000";
@@ -78,5 +79,5 @@ begin
         
         endereco <= "1000111";
         wait;
-    end process;
-end architecture a_rom_tb;
+    END PROCESS;
+END ARCHITECTURE a_rom_tb;

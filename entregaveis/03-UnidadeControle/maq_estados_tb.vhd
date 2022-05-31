@@ -1,6 +1,6 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
 
 entity maq_estados_tb is
     
@@ -10,21 +10,21 @@ architecture a_maq_estados_tb of maq_estados_tb is
     component maq_estados is
         port
         (
-            clk    : IN std_logic ;
-            rst  : IN std_logic ;
-            estado : OUT std_logic
+            clk     : IN STD_LOGIC ;
+            rst     : IN STD_LOGIC ;
+            estado  : OUT STD_LOGIC
         );
     end component;
     
-    constant period_time        : time := 100 ns;   -- escolha do período para o clock
-    signal finished             : std_logic := '0';
-    signal clk, rst, estado   : std_logic;
+    constant period_time        : TIME := 100 ns;   -- escolha do período para o clock
+    signal finished             : STD_LOGIC := '0';
+    signal clk, rst, estado     : STD_LOGIC;
     
 begin
     uut: maq_estados port map
     (
         clk     => clk,
-        rst   => rst,
+        rst     => rst,
         estado  => estado
     );
     

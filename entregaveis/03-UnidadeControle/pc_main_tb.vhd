@@ -24,8 +24,8 @@ architecture a_pc_main_tb of pc_main_tb is
     signal finished : std_logic := '0';
     signal clk, rst, wr_en : std_logic;
     signal top_level: unsigned(17 downto 0);
+    
 begin
-
     uut: pc_main port map
     (
         clk         => clk,
@@ -66,6 +66,7 @@ begin
     begin
         wait for 200 ns;
         wr_en <='1';
+        
         data_i <="0000111";
         wait for 200 ns;
         wr_en <='0';

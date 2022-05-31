@@ -1,0 +1,16 @@
+v 4
+file . "proto_uc.vhd" "aae9bf53c2a1b1277b9e59f8f40b321ed9d48a57" "20220531042542.108":
+  entity proto_uc at 1( 0) + 0 on 33;
+  architecture a_proto_uc of proto_uc at 16( 306) + 0 on 34;
+file . "rom.vhd" "bcab82e33c18c3018b1dcaddd5ed6d7a7eed08e1" "20220531042542.013":
+  entity rom at 1( 0) + 0 on 27;
+  architecture a_rom of rom at 14( 279) + 0 on 28;
+file . "program_counter.vhd" "997c11d95057a1580def0744078b493ee9b56999" "20220531042542.047":
+  entity program_counter at 1( 0) + 0 on 29;
+  architecture a_program_counter of program_counter at 15( 339) + 0 on 30;
+file . "maq_estados.vhd" "630e6e5105e492cec06e4acc4ecb7e5936f4ccb8" "20220531042542.076":
+  entity maq_estados at 1( 0) + 0 on 31;
+  architecture a_maq_estados of maq_estados at 13( 242) + 0 on 32;
+file . "proto_uc_tb.vhd" "bd5c53c5e04ef658522761cf354e61b33154693c" "20220531042542.137":
+  entity proto_uc_tb at 1( 0) + 0 on 35;
+  architecture a_proto_uc_tb of proto_uc_tb at 9( 130) + 0 on 36;

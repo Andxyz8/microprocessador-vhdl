@@ -1,28 +1,27 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
 
-entity maq_estados is
-    port(
-        clk     : in std_logic;
-        rst   : in std_logic;
-        estado  : out std_logic
+ENTITY maq_estados IS
+    PORT(
+        clk     : IN STD_LOGIC;
+        rst     : IN STD_LOGIC;
+        state   : OUT STD_LOGIC
     );
-end entity maq_estados;
+END ENTITY maq_estados;
 
-architecture a_maq_estados of maq_estados is
-    signal estado_s : std_logic; --> _s significa sinal interno
+ARCHITECTURE a_maq_estados OF maq_estados IS
+    SIGNAL state_s : STD_LOGIC; --> _s significa sinal interno
     
-begin
+BEGIN
+    PROCESS(clk, rst) BEGIN
+        IF rst = '1' THEN
+            state_s <= '0';
+        ELSIF rising_edge(clk) THEN
+            state_s <= NOT state_s;
+        END IF;
+    END PROCESS;
     
-    process(clk, rst) begin
-        if rst = '1' then
-            estado_s <= '0';
-        elsif rising_edge(clk) then
-            estado_s <= not estado_s;
-        end if;
-    end process;
+    state <= state_s;
     
-    estado <= estado_s;
-    
-end architecture a_maq_estados ;
+END ARCHITECTURE a_maq_estados ;
