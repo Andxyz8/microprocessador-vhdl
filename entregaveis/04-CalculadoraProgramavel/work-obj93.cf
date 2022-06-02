@@ -1,0 +1,31 @@
+v 4
+file . "processador_tb.vhd" "4b1f5feabbf925a5e7f5b5dcbca36c7ef0e1eb2b" "20220602183759.617":
+  entity processador_tb at 1( 0) + 0 on 47;
+  architecture a_processador_tb of processador_tb at 9( 136) + 0 on 48;
+file . "maquina_estados.vhd" "bcea8642da678a02c6713275d40f6caa9f0324a3" "20220602183511.213":
+  entity maquina_estados at 1( 0) + 0 on 31;
+  architecture a_maquina_estados of maquina_estados at 13( 261) + 0 on 32;
+file . "mux.vhd" "4e448039b41d897ae81816b775e8c8d9d2c645e8" "20220602183401.192":
+  entity mux at 1( 0) + 0 on 23;
+  architecture a_mux of mux at 16( 323) + 0 on 24;
+file . "ula.vhd" "4649fe73682f02f162cfcb7c5e8a11b92e331189" "20220602183445.342":
+  entity ula at 1( 0) + 0 on 27;
+  architecture a_ula of ula at 20( 482) + 0 on 28;
+file . "registrador_16bits.vhd" "c77d6f2aa3da1ab9520bf53fbe5e9bdbdce6e585" "20220602183353.853":
+  entity registrador_16bits at 1( 0) + 0 on 19;
+  architecture a_registrador_16bits of registrador_16bits at 15( 351) + 0 on 20;
+file . "banco_registradores.vhd" "4a52ef1120e9f78ac69be824ede6f073973ceef6" "20220602183357.193":
+  entity banco_registradores at 1( 0) + 0 on 21;
+  architecture a_banco_registradores of banco_registradores at 21( 531) + 0 on 22;
+file . "program_counter.vhd" "997c11d95057a1580def0744078b493ee9b56999" "20220602183449.513":
+  entity program_counter at 1( 0) + 0 on 29;
+  architecture a_program_counter of program_counter at 15( 339) + 0 on 30;
+file . "rom.vhd" "67720c3a88b8a602619bce6503b4c59cc13b7242" "20220602183442.219":
+  entity rom at 1( 0) + 0 on 25;
+  architecture a_rom of rom at 15( 311) + 0 on 26;
+file . "unidade_controle.vhd" "185266571e02160143c5f040d8d69ecaf108adfa" "20220602183600.435":
+  entity unidade_controle at 1( 0) + 0 on 39;
+  architecture a_unidade_controle of unidade_controle at 26( 776) + 0 on 40;
+file . "processador.vhd" "704b0db59f0bb1e1e28eb91ca96492a4b4ec5a86" "20220602183755.267":
+  entity processador at 1( 0) + 0 on 45;
+  architecture a_processador of processador at 21( 604) + 0 on 46;
