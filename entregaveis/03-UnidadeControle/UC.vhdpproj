@@ -1,15 +1,10 @@
 ﻿<Project>
   <ItemGroup>
     <File Include="maq_estados.vhd" />
-    <File Include="maq_estados_tb.vhd" />
-    <File Include="pc_main.vhd" />
-    <File Include="pc_main_tb.vhd" />
     <File Include="program_counter.vhd" />
-    <File Include="program_counter_tb.vhd" />
-    <File Include="proto_uc.vhd" />
-    <File Include="proto_uc_tb.vhd" />
+    <File Include="unidade_controle.vhd" />
+    <File Include="unidade_controle_tb.vhd" />
     <File Include="rom.vhd" />
-    <File Include="rom_tb.vhd" />
   </ItemGroup>
   <PropertyGroup />
 </Project>

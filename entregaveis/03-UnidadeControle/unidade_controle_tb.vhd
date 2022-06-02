@@ -2,11 +2,11 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
-ENTITY proto_uc_tb IS
+ENTITY unidade_controle_tb IS
     
-END ENTITY proto_uc_tb;
+END ENTITY unidade_controle_tb;
 
-ARCHITECTURE a_proto_uc_tb OF proto_uc_tb IS
+ARCHITECTURE a_unidade_controle_tb OF proto_uc_tb IS
     COMPONENT proto_uc IS
         PORT
         (
@@ -42,7 +42,7 @@ BEGIN
     
     sim_time_proc: PROCESS
     BEGIN
-        WAIT FOR 2000 ns;               -- <== TEMPO TOTAL DA SIMULACAO!!!
+        WAIT FOR 4000 ns;               -- <== TEMPO TOTAL DA SIMULACAO!!!
         finished <= '1';
         WAIT;
     END PROCESS sim_time_proc;
@@ -63,6 +63,8 @@ BEGIN
         WAIT FOR 200 ns;
         wr_en <= '1';
         
+        
+        
         wait;
     END PROCESS;
-END ARCHITECTURE a_proto_uc_tb ;
+END ARCHITECTURE a_unidade_controle_tb ;

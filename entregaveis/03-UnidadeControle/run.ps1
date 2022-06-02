@@ -5,10 +5,10 @@
 ghdl -a rom.vhd
 ghdl -a program_counter.vhd
 ghdl -a maq_estados.vhd
-ghdl -a proto_uc.vhd
+ghdl -a unidade_controle.vhd
 
 
-ghdl -a proto_uc_tb.vhd
-ghdl -r proto_uc_tb --wave=ondasproto.ghw
+ghdl -a unidade_controle_tb.vhd
+ghdl -r unidade_controle_tb --wave=ondasproto.ghw
 
 gtkwave ondasproto.ghw

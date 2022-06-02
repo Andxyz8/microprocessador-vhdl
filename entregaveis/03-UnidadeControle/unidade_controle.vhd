@@ -3,7 +3,7 @@ USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
 
-ENTITY proto_uc IS
+ENTITY unidade_controle IS
     PORT
     (
         clk         : IN STD_LOGIC;
@@ -11,9 +11,9 @@ ENTITY proto_uc IS
         wr_en       : IN STD_LOGIC;
         data_tl     : OUT UNSIGNED (14 DOWNTO 0)
     );
-END ENTITY proto_uc;
+END ENTITY unidade_controle;
 
-ARCHITECTURE a_proto_uc OF proto_uc IS
+ARCHITECTURE a_unidade_controle OF proto_uc IS
     COMPONENT program_counter IS
         PORT
         (
@@ -43,9 +43,11 @@ ARCHITECTURE a_proto_uc OF proto_uc IS
         );
     END COMPONENT maq_estados;
     
-    SIGNAL pc_i, address    : UNSIGNED(6 DOWNTO 0);
+    SIGNAL pc_i, address    : UNSIGNED(6 DOWNTO 0) := "0000000";
     SIGNAL data             : UNSIGNED(14 DOWNTO 0);
     SIGNAL state            : STD_LOGIC;
+    SIGNAL opcode           : UNSIGNED(7 DOWNTO 0);
+    SIGNAL jump_en          : STD_LOGIC;
     
 BEGIN
     PC: program_counter PORT MAP
@@ -61,7 +63,7 @@ BEGIN
     (
         clk => clk,
         address => address,
-        data => data_tl
+        data => data
     );
     
     MAQEST: maq_estados PORT MAP
@@ -71,9 +73,21 @@ BEGIN
         state => state
     );
     
+    opcode <= data(14 DOWNTO 7);
     
-    pc_i <= address + 1 WHEN state = '1' AND wr_en = '1' AND RISING_EDGE(clk)
-                        ELSE address + 1;
+    jump_en <= '1'      WHEN opcode="11111111"
+ELSE '0';
     
+    pc_i <=     data(6 DOWNTO 0)
+    WHEN
+    state = '1' AND wr_en = '1' AND RISING_EDGE(clk) AND jump_en = '1'
+ELSE
+    address + 1
+    WHEN
+    state = '1' AND wr_en = '1' AND RISING_EDGE(clk) AND jump_en = '0'
+ELSE
+    pc_i
+    WHEN
+    state = '0';
     
-END ARCHITECTURE a_proto_uc;
+END ARCHITECTURE a_unidade_controle;

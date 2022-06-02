@@ -13,6 +13,7 @@ END ENTITY maq_estados;
 ARCHITECTURE a_maq_estados OF maq_estados IS
     SIGNAL state_s : STD_LOGIC; --> _s significa sinal interno
     
+    
 BEGIN
     PROCESS(clk, rst) BEGIN
         IF rst = '1' THEN
