@@ -49,7 +49,7 @@ BEGIN
     
     wr_reg      <= opcode(4) WHEN state = "10" ELSE '0';
     
-    wr_ram      <= '1' WHEN opcode = "001000" ELSE '0';
+    wr_ram      <= '1' WHEN opcode = "001000" AND state = "10" ELSE '0';
     
     di_pc       <=  instr(6 DOWNTO 0) WHEN jump_en = "10" ELSE
                     do_pc + 1 + instr(6 DOWNTO 0) WHEN jump_en = "11" ELSE
@@ -59,7 +59,7 @@ BEGIN
     
     slt_reg1    <= "000" WHEN opcode(2) = '0' ELSE instr(8 DOWNTO 6);
     
-    slt_reg2    <= instr(5 DOWNTO 3);
+    slt_reg2    <= "000" WHEN opcode(3) = '1' ELSE instr(5 DOWNTO 3);
     
     slt_wr_reg  <= instr(8 DOWNTO 6);
     

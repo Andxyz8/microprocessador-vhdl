@@ -13,6 +13,7 @@ ENTITY processador IS
         
         reg1_out_tl         : OUT SIGNED(15 DOWNTO 0);
         reg2_out_tl         : OUT SIGNED(15 DOWNTO 0);
+        ram_data_out_tl     : OUT SIGNED(15 DOWNTO 0);
         ula_out_num_tl      : OUT SIGNED(15 DOWNTO 0);
         ula_out_bool_tl     : OUT STD_LOGIC;
         instr_tl            : OUT UNSIGNED(14 DOWNTO 0)
@@ -102,8 +103,10 @@ ARCHITECTURE a_processador of processador IS
             state          : IN UNSIGNED (1 DOWNTO 0);
             slt_op_ula     : OUT UNSIGNED (1 DOWNTO 0);
             out_bool_ula   : IN STD_LOGIC ;
+            srcA_ula       : OUT STD_LOGIC ;
             srcB_ula       : OUT STD_LOGIC ;
             wr_reg         : OUT STD_LOGIC ;
+            wr_ram         : OUT STD_LOGIC ;
             flag_carry_sum : IN STD_LOGIC ;
             flag_carry_sub : IN STD_LOGIC ;
             slt_reg1       : OUT UNSIGNED (2 DOWNTO 0);
@@ -119,8 +122,8 @@ ARCHITECTURE a_processador of processador IS
             clk      : IN STD_LOGIC ;
             wr_en    : IN STD_LOGIC ;
             address  : IN UNSIGNED (6 DOWNTO 0);
-            data_in  : IN UNSIGNED (15 DOWNTO 0);
-            data_out : OUT UNSIGNED (15 DOWNTO 0)
+            data_in  : IN SIGNED (15 DOWNTO 0);
+            data_out : OUT SIGNED (15 DOWNTO 0)
         );
     END COMPONENT;
 
@@ -128,7 +131,7 @@ ARCHITECTURE a_processador of processador IS
     SIGNAL pc_wren_s, read_rom_s, wr_reg_s, ram_wren_s      : STD_LOGIC;
     SIGNAL ula_out_bool_s, ula_srcA_s, ula_srcB_s           : STD_LOGIC;
     SIGNAL flag_carry_sum_s, flag_carry_sub_s               : STD_LOGIC;
-    SIGNAL pc_din_s, pc_dout_s, ram_address_s               : UNSIGNED(6 DOWNTO 0);
+    SIGNAL pc_din_s, pc_dout_s, ram_address_s               : UNSIGNED(6 DOWNTO 0) := "0000000";
     SIGNAL select_read1_s, select_read2_s, select_write_s   : UNSIGNED(2 DOWNTO 0);
     SIGNAL data_read1_s, data_read2_s, ula_out_num_s        : SIGNED(15 DOWNTO 0);
     SIGNAL ram_data_out_s, ram_data_in_s                    : SIGNED(15 DOWNTO 0);
@@ -169,8 +172,8 @@ BEGIN
     PORT MAP
     (
         slt     => ula_srcA_s,      -- 0 out = inA; 1 out = inB;
-        inA     => data_read1_s,
-        inB     => const,
+        inA     => data_read2_s,
+        inB     => ram_data_out_s,
         out_mux => muxA_out_s
     );
     
@@ -178,8 +181,8 @@ BEGIN
     PORT MAP
     (
         slt     => ula_srcB_s,      -- 0 out = inA; 1 out = inB;
-        inA     => data_read2_s,
-        inB     => ram_data_out_s,
+        inA     => data_read1_s,
+        inB     => const,
         out_mux => muxB_out_s
     );
     
@@ -238,7 +241,7 @@ BEGIN
     PORT MAP(
         clk      => clk,
         wr_en    => ram_wren_s,
-        address  => UNSIGNED(instr_s(5 DOWNTO 0)),
+        address  => UNSIGNED(instr_s(6 DOWNTO 0)),
         data_in  => ula_out_num_s,
         data_out => ram_data_out_s
     );
@@ -249,6 +252,7 @@ BEGIN
     pc_tl           <= pc_dout_s;
     reg1_out_tl     <= data_read1_s;
     reg2_out_tl     <= data_read2_s;
+    ram_data_out_tl <= ram_data_out_s;
     ula_out_num_tl  <= ula_out_num_s;
     ula_out_bool_tl <= ula_out_bool_s;
     instr_tl        <= instr_s;

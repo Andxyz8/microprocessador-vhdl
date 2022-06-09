@@ -16,6 +16,7 @@ ARCHITECTURE a_processador_tb OF processador_tb IS
             pc_tl            : OUT UNSIGNED (6 DOWNTO 0);
             reg1_out_tl      : OUT SIGNED (15 DOWNTO 0);
             reg2_out_tl      : OUT SIGNED (15 DOWNTO 0);
+            ram_data_out_tl  : OUT SIGNED (15 DOWNTO 0);
             ula_out_num_tl   : OUT SIGNED (15 DOWNTO 0);
             ula_out_bool_tl  : OUT STD_LOGIC;
             instr_tl         : OUT UNSIGNED (14 DOWNTO 0)
@@ -30,6 +31,7 @@ ARCHITECTURE a_processador_tb OF processador_tb IS
     SIGNAL pc_tl            : UNSIGNED (6 DOWNTO 0);
     SIGNAL reg1_out_tl      : SIGNED (15 DOWNTO 0);
     SIGNAL reg2_out_tl      : SIGNED (15 DOWNTO 0);
+    SIGNAL ram_data_out_tl  : SIGNED (15 DOWNTO 0);
     SIGNAL ula_out_num_tl   : SIGNED (15 DOWNTO 0);
     SIGNAL instr_tl         : UNSIGNED (14 DOWNTO 0);
     
@@ -43,6 +45,7 @@ BEGIN
         pc_tl            => pc_tl,
         reg1_out_tl      => reg1_out_tl,
         reg2_out_tl      => reg2_out_tl,
+        ram_data_out_tl  => ram_data_out_tl,
         ula_out_num_tl   => ula_out_num_tl,
         ula_out_bool_tl  => ula_out_bool_tl,
         instr_tl         => instr_tl
@@ -58,7 +61,7 @@ BEGIN
     
     sim_time_proc: PROCESS
     BEGIN
-        WAIT FOR 100 us;               -- <== TEMPO TOTAL DA SIMULACAO!!!
+        WAIT FOR 40 us;               -- <== TEMPO TOTAL DA SIMULACAO!!!
         finished <= '1';
         WAIT;
     END PROCESS sim_time_proc;
@@ -76,7 +79,6 @@ BEGIN
     
     PROCESS
     BEGIN
-        WAIT FOR 300 ns;
         
         WAIT;
     END PROCESS;

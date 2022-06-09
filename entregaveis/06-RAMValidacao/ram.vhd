@@ -8,13 +8,13 @@ ENTITY ram IS
         clk         : IN STD_LOGIC;
         wr_en       : IN STD_LOGIC;
         address     : IN UNSIGNED (6 DOWNTO 0);
-        data_in     : IN UNSIGNED (15 DOWNTO 0);
-        data_out    : OUT UNSIGNED (15 DOWNTO 0)
+        data_in     : IN SIGNED (15 DOWNTO 0);
+        data_out    : OUT SIGNED (15 DOWNTO 0)
     );
 END ENTITY ram;
 
 ARCHITECTURE a_ram of ram is
-    TYPE mem IS ARRAY (0 TO 127) OF UNSIGNED(15 DOWNTO 0);
+    TYPE mem IS ARRAY (0 TO 127) OF SIGNED(15 DOWNTO 0);
     SIGNAL ram_info : mem;
 
 BEGIN
