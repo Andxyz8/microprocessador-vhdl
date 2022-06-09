@@ -3,7 +3,7 @@ USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
 
-ENTITY unidade_controle IS
+ENTITY proto_uc IS
     PORT
     (
         clk         : IN STD_LOGIC;
@@ -11,9 +11,9 @@ ENTITY unidade_controle IS
         wr_en       : IN STD_LOGIC;
         data_tl     : OUT UNSIGNED (14 DOWNTO 0)
     );
-END ENTITY unidade_controle;
+END ENTITY proto_uc;
 
-ARCHITECTURE a_unidade_controle OF proto_uc IS
+ARCHITECTURE a_proto_uc OF proto_uc IS
     COMPONENT program_counter IS
         PORT
         (
@@ -90,4 +90,4 @@ ELSE
     WHEN
     state = '0';
     
-END ARCHITECTURE a_unidade_controle;
+END ARCHITECTURE a_proto_uc;

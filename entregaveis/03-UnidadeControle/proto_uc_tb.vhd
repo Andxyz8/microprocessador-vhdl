@@ -2,11 +2,11 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
-ENTITY unidade_controle_tb IS
+ENTITY proto_uc_tb IS
     
-END ENTITY unidade_controle_tb;
+END ENTITY proto_uc_tb;
 
-ARCHITECTURE a_unidade_controle_tb OF proto_uc_tb IS
+ARCHITECTURE a_proto_uc_tb OF proto_uc_tb IS
     COMPONENT proto_uc IS
         PORT
         (
@@ -67,4 +67,4 @@ BEGIN
         
         wait;
     END PROCESS;
-END ARCHITECTURE a_unidade_controle_tb ;
+END ARCHITECTURE a_proto_uc_tb ;
