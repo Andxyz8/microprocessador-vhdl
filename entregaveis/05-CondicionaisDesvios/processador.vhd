@@ -44,9 +44,7 @@ ARCHITECTURE a_processador of processador IS
             inB            : IN SIGNED (15 DOWNTO 0);
             slt_op         : IN UNSIGNED (1 DOWNTO 0);
             out_num        : OUT SIGNED (15 DOWNTO 0);
-            out_bool       : OUT STD_LOGIC ;
-            flag_carry_sum : OUT STD_LOGIC ;
-            flag_carry_sub : OUT STD_LOGIC
+            out_bool       : OUT STD_LOGIC
         );
     END COMPONENT;
     
@@ -104,8 +102,6 @@ ARCHITECTURE a_processador of processador IS
             out_bool_ula   : IN STD_LOGIC ;
             srcB_ula       : OUT STD_LOGIC ;
             wr_reg         : OUT STD_LOGIC ;
-            flag_carry_sum : IN STD_LOGIC ;
-            flag_carry_sub : IN STD_LOGIC ;
             slt_reg1       : OUT UNSIGNED (2 DOWNTO 0);
             slt_reg2       : OUT UNSIGNED (2 DOWNTO 0);
             slt_wr_reg     : OUT UNSIGNED (2 DOWNTO 0);
@@ -116,7 +112,6 @@ ARCHITECTURE a_processador of processador IS
     SIGNAL state_s, slt_op_ula_s                            : UNSIGNED(1 DOWNTO 0);
     SIGNAL pc_wren_s, read_rom_s, wr_reg_s                  : STD_LOGIC;
     SIGNAL ula_out_bool_s, ula_srcB_s                       : STD_LOGIC;
-    SIGNAL flag_carry_sum_s, flag_carry_sub_s               : STD_LOGIC;
     SIGNAL pc_din_s, pc_dout_s                              : UNSIGNED(6 DOWNTO 0);
     SIGNAL select_read1_s, select_read2_s, select_write_s   : UNSIGNED(2 DOWNTO 0);
     SIGNAL data_read1_s, data_read2_s, ula_out_num_s        : SIGNED(15 DOWNTO 0);
@@ -151,11 +146,7 @@ BEGIN
         slt_op      => slt_op_ula_s,
 
         out_num     => ula_out_num_s,
-        out_bool    => ula_out_bool_s,
-        
-        flag_carry_sum => flag_carry_sum_s,
-        flag_carry_sub => flag_carry_sub_s
-        
+        out_bool    => ula_out_bool_s
     );
 
     proc_mux: mux
@@ -208,8 +199,6 @@ BEGIN
         out_bool_ula    => ula_out_bool_s,
         srcB_ula        => ula_srcB_s,
         wr_reg          => wr_reg_s,
-        flag_carry_sum  => flag_carry_sum_s,
-        flag_carry_sub  => flag_carry_sub_s,
         slt_reg1        => select_read1_s,
         slt_reg2        => select_read2_s,
         slt_wr_reg      => select_write_s,

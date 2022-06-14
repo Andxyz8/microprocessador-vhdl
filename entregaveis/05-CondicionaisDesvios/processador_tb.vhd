@@ -74,11 +74,5 @@ BEGIN
         WAIT;
     END PROCESS clk_proc;
     
-    PROCESS
-    BEGIN
-        WAIT FOR 300 ns;
-        
-        WAIT;
-    END PROCESS;
     
 END ARCHITECTURE a_processador_tb;

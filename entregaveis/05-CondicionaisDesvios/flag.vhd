@@ -4,11 +4,11 @@ USE ieee.numeric_std.ALL;
 
 ENTITY flag IS
     PORT(
-        clk     : IN STD_LOGIC;
-        rst     : IN STD_LOGIC;
-        wr_en   : IN STD_LOGIC;
-        din     : IN STD_LOGIC;
-        dout    : OUT STD_LOGIC
+        clk         : IN STD_LOGIC;
+        rst         : IN STD_LOGIC;
+        wr_en       : IN STD_LOGIC;
+        data_in     : IN STD_LOGIC;
+        data_out    : OUT STD_LOGIC
     );
 END ENTITY flag;
 
@@ -23,11 +23,11 @@ BEGIN
             info <= '0';
         ELSIF wr_en = '1' THEN
             IF rising_edge(clk) THEN
-                info <= din;
+                info <= data_in;
             END IF;
         END IF;
     END PROCESS;
     
-    dout <= info;
+    data_out <= info;
     
 END ARCHITECTURE a_flag;
