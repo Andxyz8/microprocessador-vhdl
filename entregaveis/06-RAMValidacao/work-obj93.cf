@@ -1,37 +1,37 @@
 v 4
-file . "banco_registradores.vhd" "ae26e7b0897e049b05cec4ce08a8f432cb2c5c52" "20220615014405.194":
-  entity banco_registradores at 1( 0) + 0 on 117;
-  architecture a_banco_registradores of banco_registradores at 21( 592) + 0 on 118;
-file . "processador.vhd" "3873c5abc215c79222617009de6964646b44ad8c" "20220615014405.400":
-  entity processador at 1( 0) + 0 on 133;
-  architecture a_processador of processador at 22( 644) + 0 on 134;
-file . "maquina_estados.vhd" "bcea8642da678a02c6713275d40f6caa9f0324a3" "20220615014405.349":
-  entity maquina_estados at 1( 0) + 0 on 129;
-  architecture a_maquina_estados of maquina_estados at 13( 261) + 0 on 130;
-file . "rom.vhd" "6834fd4ba79808ec77ad15bb09bee363c207ab52" "20220615014405.270":
-  entity rom at 1( 0) + 0 on 123;
-  architecture a_rom of rom at 15( 311) + 0 on 124;
-file . "mux.vhd" "abc6e3d060b6e37173330156ec50e3a47eb20d6b" "20220615014405.221":
-  entity mux at 1( 0) + 0 on 119;
-  architecture a_mux of mux at 17( 392) + 0 on 120;
-file . "flag.vhd" "9b1ee3a8720f920458717f305cff04512441b403" "20220615014405.137":
-  entity flag at 1( 0) + 0 on 113;
-  architecture a_flag of flag at 15( 314) + 0 on 114;
-file . "registrador_16bits.vhd" "64a9f7ea6cb6e39479ee1a1d8f2bc4204f737463" "20220615014405.167":
-  entity registrador_16bits at 1( 0) + 0 on 115;
-  architecture a_registrador_16bits of registrador_16bits at 15( 347) + 0 on 116;
-file . "ram.vhd" "03845e69093bb6fe6e5b2d3b3a4022a1d6ce2191" "20220615014405.245":
-  entity ram at 1( 0) + 0 on 121;
-  architecture a_ram of ram at 16( 352) + 0 on 122;
-file . "ula.vhd" "5c68761ab379faeff7de034d2ad8602db3571fce" "20220615014405.296":
-  entity ula at 1( 0) + 0 on 125;
-  architecture a_ula of ula at 21( 437) + 0 on 126;
-file . "unidade_controle.vhd" "4a38b849b3d421f91e50522c4eb5db73121dbb44" "20220615014405.376":
-  entity unidade_controle at 1( 0) + 0 on 131;
-  architecture a_unidade_controle of unidade_controle at 28( 926) + 0 on 132;
-file . "processador_tb.vhd" "069df7da122d5234519021d88152b7b3a9bb1b42" "20220615014405.428":
-  entity processador_tb at 1( 0) + 0 on 135;
-  architecture a_processador_tb of processador_tb at 9( 136) + 0 on 136;
-file . "program_counter.vhd" "9b8a53164ad2804e2ffa0ca476c25bd92f8843f9" "20220615014405.322":
-  entity program_counter at 1( 0) + 0 on 127;
-  architecture a_program_counter of program_counter at 15( 324) + 0 on 128;
+file . "ula.vhd" "5c68761ab379faeff7de034d2ad8602db3571fce" "20220615010043.815":
+  entity ula at 1( 0) + 0 on 163;
+  architecture a_ula of ula at 21( 437) + 0 on 164;
+file . "processador.vhd" "3873c5abc215c79222617009de6964646b44ad8c" "20220615012147.308":
+  entity processador at 1( 0) + 0 on 209;
+  architecture a_processador of processador at 22( 644) + 0 on 210;
+file . "program_counter.vhd" "9b8a53164ad2804e2ffa0ca476c25bd92f8843f9" "20220615012147.217":
+  entity program_counter at 1( 0) + 0 on 203;
+  architecture a_program_counter of program_counter at 15( 324) + 0 on 204;
+file . "ram.vhd" "03845e69093bb6fe6e5b2d3b3a4022a1d6ce2191" "20220615012147.114":
+  entity ram at 1( 0) + 0 on 199;
+  architecture a_ram of ram at 16( 352) + 0 on 200;
+file . "banco_registradores.vhd" "ae26e7b0897e049b05cec4ce08a8f432cb2c5c52" "20220615012147.034":
+  entity banco_registradores at 1( 0) + 0 on 197;
+  architecture a_banco_registradores of banco_registradores at 21( 592) + 0 on 198;
+file . "flag.vhd" "9b1ee3a8720f920458717f305cff04512441b403" "20220615012146.968":
+  entity flag at 1( 0) + 0 on 195;
+  architecture a_flag of flag at 15( 314) + 0 on 196;
+file . "registrador_16bits.vhd" "64a9f7ea6cb6e39479ee1a1d8f2bc4204f737463" "20220615010502.948":
+  entity registrador_16bits at 1( 0) + 0 on 175;
+  architecture a_registrador_16bits of registrador_16bits at 15( 347) + 0 on 176;
+file . "mux.vhd" "abc6e3d060b6e37173330156ec50e3a47eb20d6b" "20220615010503.019":
+  entity mux at 1( 0) + 0 on 179;
+  architecture a_mux of mux at 17( 392) + 0 on 180;
+file . "rom.vhd" "d5ff17523df789bc6a546786d5710a4c6c5b2569" "20220615012147.140":
+  entity rom at 1( 0) + 0 on 201;
+  architecture a_rom of rom at 15( 311) + 0 on 202;
+file . "maquina_estados.vhd" "bcea8642da678a02c6713275d40f6caa9f0324a3" "20220615012147.251":
+  entity maquina_estados at 1( 0) + 0 on 205;
+  architecture a_maquina_estados of maquina_estados at 13( 261) + 0 on 206;
+file . "processador_tb.vhd" "069df7da122d5234519021d88152b7b3a9bb1b42" "20220615012147.336":
+  entity processador_tb at 1( 0) + 0 on 211;
+  architecture a_processador_tb of processador_tb at 9( 136) + 0 on 212;
+file . "unidade_controle.vhd" "58231159d44213ff3c4983e2269e2628fbebf790" "20220615012147.280":
+  entity unidade_controle at 1( 0) + 0 on 207;
+  architecture a_unidade_controle of unidade_controle at 28( 926) + 0 on 208;
