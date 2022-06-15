@@ -2,11 +2,12 @@
 
 #Set-Alias -Name gtkwave -Value "C:\Users\User\AppData\Roaming\VHDPlus\packages\gtkwave\gtkwave\bin\gtkwave.exe"
 
+ghdl -a flag.vhd
 ghdl -a registrador_16bits.vhd
 ghdl -a banco_registradores.vhd
 ghdl -a mux.vhd
-ghdl -a rom.vhd
 ghdl -a ram.vhd
+ghdl -a rom.vhd
 ghdl -a ula.vhd
 ghdl -a program_counter.vhd
 ghdl -a maquina_estados.vhd

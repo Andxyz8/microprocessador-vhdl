@@ -15,6 +15,7 @@ END ENTITY ram;
 
 ARCHITECTURE a_ram of ram is
     TYPE mem IS ARRAY (0 TO 127) OF SIGNED(15 DOWNTO 0);
+    
     SIGNAL ram_info : mem;
 
 BEGIN

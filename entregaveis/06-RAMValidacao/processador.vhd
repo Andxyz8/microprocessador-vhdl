@@ -13,7 +13,6 @@ ENTITY processador IS
         
         reg1_out_tl         : OUT SIGNED(15 DOWNTO 0);
         reg2_out_tl         : OUT SIGNED(15 DOWNTO 0);
-        ram_data_out_tl     : OUT SIGNED(15 DOWNTO 0);
         ula_out_num_tl      : OUT SIGNED(15 DOWNTO 0);
         ula_out_bool_tl     : OUT STD_LOGIC;
         instr_tl            : OUT UNSIGNED(14 DOWNTO 0)
@@ -45,18 +44,17 @@ ARCHITECTURE a_processador of processador IS
             inB            : IN SIGNED (15 DOWNTO 0);
             slt_op         : IN UNSIGNED (1 DOWNTO 0);
             out_num        : OUT SIGNED (15 DOWNTO 0);
-            out_bool       : OUT STD_LOGIC ;
-            flag_carry_sum : OUT STD_LOGIC ;
-            flag_carry_sub : OUT STD_LOGIC
+            out_bool       : OUT STD_LOGIC
         );
     END COMPONENT;
     
     COMPONENT mux IS
         PORT
         (
-            slt     : IN STD_LOGIC ;
+            slt     : IN UNSIGNED(1 DOWNTO 0) ;
             inA     : IN SIGNED (15 DOWNTO 0);
             inB     : IN SIGNED (15 DOWNTO 0);
+            inC     : IN SIGNED (15 DOWNTO 0);
             out_mux : OUT SIGNED (15 DOWNTO 0)
         );
     END COMPONENT;
@@ -91,31 +89,6 @@ ARCHITECTURE a_processador of processador IS
         );
     END COMPONENT;
     
-    COMPONENT unidade_controle IS
-        PORT
-        (
-            clk            : IN STD_LOGIC ;
-            rst            : IN STD_LOGIC ;
-            read_rom       : OUT STD_LOGIC ;
-            wren_pc        : OUT STD_LOGIC ;
-            di_pc          : OUT UNSIGNED (6 DOWNTO 0);
-            do_pc          : IN UNSIGNED (6 DOWNTO 0);
-            state          : IN UNSIGNED (1 DOWNTO 0);
-            slt_op_ula     : OUT UNSIGNED (1 DOWNTO 0);
-            out_bool_ula   : IN STD_LOGIC ;
-            srcA_ula       : OUT STD_LOGIC ;
-            srcB_ula       : OUT STD_LOGIC ;
-            wr_reg         : OUT STD_LOGIC ;
-            wr_ram         : OUT STD_LOGIC ;
-            flag_carry_sum : IN STD_LOGIC ;
-            flag_carry_sub : IN STD_LOGIC ;
-            slt_reg1       : OUT UNSIGNED (2 DOWNTO 0);
-            slt_reg2       : OUT UNSIGNED (2 DOWNTO 0);
-            slt_wr_reg     : OUT UNSIGNED (2 DOWNTO 0);
-            instr          : IN UNSIGNED (14 DOWNTO 0)
-        );
-    END COMPONENT;
-    
     COMPONENT ram IS
         PORT
         (
@@ -125,19 +98,52 @@ ARCHITECTURE a_processador of processador IS
             data_in  : IN SIGNED (15 DOWNTO 0);
             data_out : OUT SIGNED (15 DOWNTO 0)
         );
+    END COMPONENT ram;
+    
+    COMPONENT unidade_controle IS
+        PORT
+        (
+            clk            : IN STD_LOGIC ;
+            rst            : IN STD_LOGIC ;
+            read_rom       : OUT STD_LOGIC ;
+            wren_ram       : OUT STD_LOGIC ;
+            wren_pc        : OUT STD_LOGIC ;
+            di_pc          : OUT UNSIGNED (6 DOWNTO 0);
+            do_pc          : IN UNSIGNED (6 DOWNTO 0);
+            state          : IN UNSIGNED (1 DOWNTO 0);
+            slt_op_ula     : OUT UNSIGNED (1 DOWNTO 0);
+            out_bool_ula   : IN STD_LOGIC ;
+            srcB_ula       : OUT UNSIGNED (1 DOWNTO 0);
+            wr_reg         : OUT STD_LOGIC ;
+            slt_reg1       : OUT UNSIGNED (2 DOWNTO 0);
+            slt_reg2       : OUT UNSIGNED (2 DOWNTO 0);
+            slt_wr_reg     : OUT UNSIGNED (2 DOWNTO 0);
+            instr          : IN UNSIGNED (14 DOWNTO 0)
+        );
     END COMPONENT;
 
-    SIGNAL state_s, slt_op_ula_s                            : UNSIGNED(1 DOWNTO 0);
-    SIGNAL pc_wren_s, read_rom_s, wr_reg_s, ram_wren_s      : STD_LOGIC;
-    SIGNAL ula_out_bool_s, ula_srcA_s, ula_srcB_s           : STD_LOGIC;
-    SIGNAL flag_carry_sum_s, flag_carry_sub_s               : STD_LOGIC;
-    SIGNAL pc_din_s, pc_dout_s, ram_address_s               : UNSIGNED(6 DOWNTO 0) := "0000000";
-    SIGNAL select_read1_s, select_read2_s, select_write_s   : UNSIGNED(2 DOWNTO 0);
-    SIGNAL data_read1_s, data_read2_s, ula_out_num_s        : SIGNED(15 DOWNTO 0);
-    SIGNAL ram_data_out_s, ram_data_in_s                    : SIGNED(15 DOWNTO 0);
-    SIGNAL instr_s                                          : UNSIGNED(14 DOWNTO 0);
-    SIGNAL const, muxA_out_s, muxB_out_s                    : SIGNED(15 DOWNTO 0);
-    
+    SIGNAL pc_wren_s        : STD_LOGIC;
+    SIGNAL read_rom_s       : STD_LOGIC;
+    SIGNAL wr_reg_s         : STD_LOGIC;
+    SIGNAL ula_out_bool_s   : STD_LOGIC;
+    SIGNAL ula_srcB_s       : UNSIGNED(1 DOWNTO 0);
+    SIGNAL state_s          : UNSIGNED(1 DOWNTO 0);
+    SIGNAL slt_op_ula_s     : UNSIGNED(1 DOWNTO 0);
+    SIGNAL select_read1_s   : UNSIGNED(2 DOWNTO 0);
+    SIGNAL select_read2_s   : UNSIGNED(2 DOWNTO 0);
+    SIGNAL select_write_s   : UNSIGNED(2 DOWNTO 0);
+    SIGNAL pc_din_s         : UNSIGNED(6 DOWNTO 0);
+    SIGNAL pc_dout_s        : UNSIGNED(6 DOWNTO 0);
+    SIGNAL instr_s          : UNSIGNED(14 DOWNTO 0);
+    SIGNAL data_read1_s     : SIGNED(15 DOWNTO 0);
+    SIGNAL data_read2_s     : SIGNED(15 DOWNTO 0);
+    SIGNAL ula_out_num_s    : SIGNED(15 DOWNTO 0);
+    SIGNAL const            : SIGNED(15 DOWNTO 0);
+    SIGNAL mux_out_s        : SIGNED(15 DOWNTO 0);
+    SIGNAL ram_wren_s       : STD_LOGIC;
+    SIGNAL ram_address_s    : UNSIGNED(6 DOWNTO 0);
+    SIGNAL ram_dout_s       : SIGNED(15 DOWNTO 0);
+
 BEGIN
     
     proc_banco_registradores: banco_registradores
@@ -146,9 +152,11 @@ BEGIN
         select_read1 => select_read1_s,
         select_read2 => select_read2_s,
         select_write => select_write_s,
+        
         data_read1  => data_read1_s,
         data_read2  => data_read2_s,
         data_write  => ula_out_num_s,
+        
         wr_en       => wr_reg_s,
         clk         => clk,
         rst         => rst
@@ -158,32 +166,23 @@ BEGIN
     proc_ula: ula
     PORT MAP
     (
-        inA         => muxA_out_s,
-        inB         => muxB_out_s,
-        slt_op      => slt_op_ula_s,
-        out_num     => ula_out_num_s,
-        out_bool    => ula_out_bool_s,
-        flag_carry_sum => flag_carry_sum_s,
-        flag_carry_sub => flag_carry_sub_s
+        inA         => data_read1_s,
+        inB         => mux_out_s,
         
+        slt_op      => slt_op_ula_s,
+
+        out_num     => ula_out_num_s,
+        out_bool    => ula_out_bool_s
     );
 
-    proc_muxA: mux
+    proc_mux: mux
     PORT MAP
     (
-        slt     => ula_srcA_s,      -- 0 out = inA; 1 out = inB;
+        slt     => ula_srcB_s,
         inA     => data_read2_s,
-        inB     => ram_data_out_s,
-        out_mux => muxA_out_s
-    );
-    
-    proc_muxB: mux
-    PORT MAP
-    (
-        slt     => ula_srcB_s,      -- 0 out = inA; 1 out = inB;
-        inA     => data_read1_s,
         inB     => const,
-        out_mux => muxB_out_s
+        inC     => ram_dout_s,
+        out_mux => mux_out_s
     );
     
     proc_maq_est: maquina_estados
@@ -213,46 +212,44 @@ BEGIN
         data    => instr_s
     );
     
+    proc_ram: ram
+    PORT MAP
+    (
+        clk      => clk,
+        wr_en    => ram_wren_s,
+        address  => ram_address_s,
+        data_in  => ula_out_num_s,
+        data_out => ram_dout_s
+    );
+
     proc_uc: unidade_controle
     PORT MAP
     (
         clk             => clk,
         rst             => rst,
         read_rom        => read_rom_s,
+        wren_ram        => ram_wren_s,
         wren_pc         => pc_wren_s,
         di_pc           => pc_din_s,
         do_pc           => pc_dout_s,
         state           => state_s,
         slt_op_ula      => slt_op_ula_s,
         out_bool_ula    => ula_out_bool_s,
-        srcA_ula        => ula_srcA_s,
         srcB_ula        => ula_srcB_s,
         wr_reg          => wr_reg_s,
-        wr_ram          => ram_wren_s,
-        flag_carry_sum  => flag_carry_sum_s,
-        flag_carry_sub  => flag_carry_sub_s,
         slt_reg1        => select_read1_s,
         slt_reg2        => select_read2_s,
         slt_wr_reg      => select_write_s,
         instr           => instr_s
     );
-    
-    proc_ram: ram
-    PORT MAP(
-        clk      => clk,
-        wr_en    => ram_wren_s,
-        address  => UNSIGNED(instr_s(6 DOWNTO 0)),
-        data_in  => ula_out_num_s,
-        data_out => ram_data_out_s
-    );
 
-    const <= SIGNED("0000000000" & instr_s(5 DOWNTO 0));
+    const           <= SIGNED("000000000" & instr_s(6 DOWNTO 0));
+    ram_address_s   <= instr_s(6 DOWNTO 0);
 
     state_tl        <= state_s;
     pc_tl           <= pc_dout_s;
     reg1_out_tl     <= data_read1_s;
     reg2_out_tl     <= data_read2_s;
-    ram_data_out_tl <= ram_data_out_s;
     ula_out_num_tl  <= ula_out_num_s;
     ula_out_bool_tl <= ula_out_bool_s;
     instr_tl        <= instr_s;

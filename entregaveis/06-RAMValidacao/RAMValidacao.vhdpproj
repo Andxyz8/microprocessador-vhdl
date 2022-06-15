@@ -1,6 +1,7 @@
 ﻿<Project>
   <ItemGroup>
     <File Include="banco_registradores.vhd" />
+    <File Include="flag.vhd" />
     <File Include="maquina_estados.vhd" />
     <File Include="mux.vhd" />
     <File Include="processador.vhd" />

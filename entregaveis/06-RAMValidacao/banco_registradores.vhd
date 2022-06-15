@@ -2,76 +2,162 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
-entity banco_registradores is
+ENTITY banco_registradores is
     port(
-        wr_en: in STD_LOGIC;
-        clk: in STD_LOGIC;
-        rst: in STD_LOGIC;
+        wr_en           : IN STD_LOGIC;
+        clk             : IN STD_LOGIC;
+        rst             : IN STD_LOGIC;
         
-        select_read1: in UNSIGNED(2 DOWNTO 0);
-        select_read2: in UNSIGNED(2 DOWNTO 0);
-        select_write: in UNSIGNED(2 DOWNTO 0);
+        select_read1    : IN UNSIGNED(2 DOWNTO 0);
+        select_read2    : IN UNSIGNED(2 DOWNTO 0);
+        select_write    : IN UNSIGNED(2 DOWNTO 0);
         
-        data_write: in SIGNED(15 DOWNTO 0);
-        data_read1: out SIGNED(15 DOWNTO 0);
-        data_read2: out SIGNED(15 DOWNTO 0)
+        data_write      : IN SIGNED(15 DOWNTO 0);
+        data_read1      : OUT SIGNED(15 DOWNTO 0);
+        data_read2      : OUT SIGNED(15 DOWNTO 0)
     );
-end entity banco_registradores;
+END ENTITY banco_registradores;
 
-architecture a_banco_registradores of banco_registradores is
-    component registrador_16bits is
-        port(
-            clk : in STD_LOGIC;
-            rst : in STD_LOGIC;
-            wr_en : in STD_LOGIC;
-            data_in : in SIGNED (15 DOWNTO 0);
-            data_out : out SIGNED (15 DOWNTO 0)
+ARCHITECTURE a_banco_registradores OF banco_registradores IS
+    COMPONENT registrador_16bits IS
+        PORT(
+            clk         : IN STD_LOGIC;
+            rst         : IN STD_LOGIC;
+            wr_en       : IN STD_LOGIC;
+            data_in     : IN SIGNED (15 DOWNTO 0);
+            data_out    : OUT SIGNED (15 DOWNTO 0)
         );
-    end component;
+    END COMPONENT;
     
-    signal wr_en1, wr_en2, wr_en3, wr_en4, wr_en5, wr_en6, wr_en7 : STD_LOGIC := '0';
-    signal data_out0, data_out1, data_out2, data_out3, data_out4, data_out5, data_out6, data_out7: SIGNED(15 downto 0);
-    constant wr_en0 : STD_LOGIC:='0';
-    
-begin
-    
-    registrador0: registrador_16bits port map(clk => clk, rst => rst, wr_en => wr_en0, data_in => data_write, data_out => data_out0);
-    registrador1: registrador_16bits port map(clk => clk, rst => rst, wr_en => wr_en1, data_in => data_write, data_out => data_out1);
-    registrador2: registrador_16bits port map(clk => clk, rst => rst, wr_en => wr_en2, data_in => data_write, data_out => data_out2);
-    registrador3: registrador_16bits port map(clk => clk, rst => rst, wr_en => wr_en3, data_in => data_write, data_out => data_out3);
-    registrador4: registrador_16bits port map(clk => clk, rst => rst, wr_en => wr_en4, data_in => data_write, data_out => data_out4);
-    registrador5: registrador_16bits port map(clk => clk, rst => rst, wr_en => wr_en5, data_in => data_write, data_out => data_out5);
-    registrador6: registrador_16bits port map(clk => clk, rst => rst, wr_en => wr_en6, data_in => data_write, data_out => data_out6);
-    registrador7: registrador_16bits port map(clk => clk, rst => rst, wr_en => wr_en7, data_in => data_write, data_out => data_out7);
-    
-    wr_en1 <='1' when select_write = "001" and wr_en='1' else '0';
-    wr_en2 <='1' when select_write = "010" and wr_en='1' else '0';
-    wr_en3 <='1' when select_write = "011" and wr_en='1' else '0';
-    wr_en4 <='1' when select_write = "100" and wr_en='1' else '0';
-    wr_en5 <='1' when select_write = "101" and wr_en='1' else '0';
-    wr_en6 <='1' when select_write = "110" and wr_en='1' else '0';
-    wr_en7 <='1' when select_write = "111" and wr_en='1' else '0';
+    CONSTANT write_enable_L : STD_LOGIC:='0';
+    SIGNAL write_enable_A   : STD_LOGIC := '0';
+    SIGNAL write_enable_B   : STD_LOGIC := '0';
+    SIGNAL write_enable_C   : STD_LOGIC := '0';
+    SIGNAL write_enable_D   : STD_LOGIC := '0';
+    SIGNAL write_enable_E   : STD_LOGIC := '0';
+    SIGNAL write_enable_F   : STD_LOGIC := '0';
+    SIGNAL write_enable_H   : STD_LOGIC := '0';
+    SIGNAL data_out_A       : SIGNED(15 DOWNTO 0);
+    SIGNAL data_out_B       : SIGNED(15 DOWNTO 0);
+    SIGNAL data_out_C       : SIGNED(15 DOWNTO 0);
+    SIGNAL data_out_D       : SIGNED(15 DOWNTO 0);
+    SIGNAL data_out_E       : SIGNED(15 DOWNTO 0);
+    SIGNAL data_out_F       : SIGNED(15 DOWNTO 0);
+    SIGNAL data_out_H       : SIGNED(15 DOWNTO 0);
+    SIGNAL data_out_L       : SIGNED(15 DOWNTO 0);
     
     
+BEGIN
     
-    data_read1 <= data_out0 when select_read1 = "000" else
-    data_out1 when select_read1 = "001" else
-    data_out2 when select_read1 = "010" else
-    data_out3 when select_read1 = "011" else
-    data_out4 when select_read1 = "100" else
-    data_out5 when select_read1 = "101" else
-    data_out6 when select_read1 = "110" else
-    data_out7 when select_read1 = "111" else
+    L: registrador_16bits
+    PORT MAP 
+    (
+        clk         => clk,
+        rst         => rst,
+        wr_en       => write_enable_L,
+        data_in     => data_write,
+        data_out    => data_out_L
+    );
+
+    A: registrador_16bits
+    PORT MAP 
+    (
+        clk         => clk,
+        rst         => rst,
+        wr_en       => write_enable_A,
+        data_in     => data_write,
+        data_out    => data_out_A
+    );
+
+    B: registrador_16bits
+    PORT MAP 
+    (
+        clk         => clk,
+        rst         => rst,
+        wr_en       => write_enable_B,
+        data_in     => data_write,
+        data_out    => data_out_B
+    );
+
+    C: registrador_16bits
+    PORT MAP 
+    (
+        clk         => clk,
+        rst         => rst,
+        wr_en       => write_enable_C,
+        data_in     => data_write,
+        data_out    => data_out_C
+    );
+
+    D: registrador_16bits
+    PORT MAP 
+    (
+        clk         => clk,
+        rst         => rst,
+        wr_en       => write_enable_D,
+        data_in     => data_write,
+        data_out    => data_out_D
+    );
+
+    E: registrador_16bits
+    PORT MAP 
+    (
+        clk         => clk,
+        rst         => rst,
+        wr_en       => write_enable_E,
+        data_in     => data_write,
+        data_out    => data_out_E
+    );
+
+    F: registrador_16bits
+    PORT MAP 
+    (
+        clk         => clk,
+        rst         => rst,
+        wr_en       => write_enable_F,
+        data_in     => data_write,
+        data_out    => data_out_F
+    );
+
+    H: registrador_16bits
+    PORT MAP 
+    (
+        clk         => clk,
+        rst         => rst,
+        wr_en       => write_enable_H,
+        data_in     => data_write,
+        data_out    => data_out_H
+    );
+
+    
+    write_enable_A <='1' WHEN select_write = "001" and wr_en = '1' ELSE '0';
+    write_enable_B <='1' WHEN select_write = "010" and wr_en = '1' ELSE '0';
+    write_enable_C <='1' WHEN select_write = "011" and wr_en = '1' ELSE '0';
+    write_enable_D <='1' WHEN select_write = "100" and wr_en = '1' ELSE '0';
+    write_enable_E <='1' WHEN select_write = "101" and wr_en = '1' ELSE '0';
+    write_enable_F <='1' WHEN select_write = "110" and wr_en = '1' ELSE '0';
+    write_enable_H <='1' WHEN select_write = "111" and wr_en = '1' ELSE '0';
+    
+    
+    
+    data_read1 <=   data_out_L WHEN select_read1 = "000" else
+                    data_out_A WHEN select_read1 = "001" else
+                    data_out_B WHEN select_read1 = "010" else
+                    data_out_C WHEN select_read1 = "011" else
+                    data_out_D WHEN select_read1 = "100" else
+                    data_out_E WHEN select_read1 = "101" else
+                    data_out_F WHEN select_read1 = "110" else
+                    data_out_H WHEN select_read1 = "111" else
                     "0000000000000000";
     
-    data_read2 <= data_out0 when select_read2 ="000" else
-    data_out1 when select_read2 ="001" else
-    data_out2 when select_read2 ="010" else
-    data_out3 when select_read2 ="011" else
-    data_out4 when select_read2 ="100" else
-    data_out5 when select_read2 ="101" else
-    data_out6 when select_read2 ="110" else
-    data_out7 when select_read2 ="111" else
+    data_read2 <=   data_out_L WHEN select_read2 ="000" else
+                    data_out_A WHEN select_read2 ="001" else
+                    data_out_B WHEN select_read2 ="010" else
+                    data_out_C WHEN select_read2 ="011" else
+                    data_out_D WHEN select_read2 ="100" else
+                    data_out_E WHEN select_read2 ="101" else
+                    data_out_F WHEN select_read2 ="110" else
+                    data_out_H WHEN select_read2 ="111" else
                     "0000000000000000";
 
-end architecture a_banco_registradores;
+END ARCHITECTURE a_banco_registradores;

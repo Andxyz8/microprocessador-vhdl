@@ -4,12 +4,11 @@ USE ieee.numeric_std.ALL;
 
 ENTITY ula IS
     PORT(
-        inA, inB        : IN SIGNED(15 DOWNTO 0);
-        slt_op          : IN UNSIGNED(1 DOWNTO 0);
-        out_num         : OUT SIGNED(15 DOWNTO 0);
-        out_bool        : OUT STD_LOGIC;
-        flag_carry_sum  : OUT STD_LOGIC;
-        flag_carry_sub  : OUT STD_LOGIC 
+        inA         : IN SIGNED(15 DOWNTO 0);
+        inB         : IN SIGNED(15 DOWNTO 0);
+        out_num     : OUT SIGNED(15 DOWNTO 0);
+        slt_op      : IN UNSIGNED(1 DOWNTO 0);
+        out_bool    : OUT STD_LOGIC
     );
 END ENTITY ula;
 
@@ -32,15 +31,12 @@ BEGIN
                 inA - inB WHEN slt_op = "01" ELSE
                 "0000000000000000";
 
-    out_bool <= '1' WHEN (inA > inB) AND slt_op = "10"     ELSE
-                '1' WHEN (inA /= inB) AND slt_op = "11"    ELSE
+    out_bool <= sum_17bit(16) WHEN slt_op = "00" ELSE
+                '1' WHEN slt_op = "01" AND inB > inA ELSE
+                '1' WHEN (inA > inB) AND slt_op = "10" ELSE
+                '1' WHEN (inA /= inB) AND slt_op = "11" ELSE
                 '0';
 
-    flag_carry_sum <= sum_17bit(16) WHEN slt_op = "00" ELSE
-                      '0';
-    
-    flag_carry_sub <= '1' WHEN slt_op = "01" AND inB > inA ELSE
-                      '0';
     
 END ARCHITECTURE a_ula;
 
