@@ -11,13 +11,13 @@
 01101_011_000_0000	LD (C), L   #Carregando valor 0 no endereço da RAM apontado por C
 01100_011_0100001	SBC C, 32   #Verifica se estourou o loop
 11111_000_1111100	JR -4
-					
+
 00001_100_0000011	LD D, 3
 00101_100_0000011	ADD D, 3    #Incrementando o valor de D em 3
 01101_100_000_0000	LD (D), L   #Carregando valor 0 no endereço da RAM apontado por D
 01100_100_0100001	SBC D, 32   #Verifica se estourou o loop
 11111_000_1111100	JR -4
-					
+
 00001_101_0000101	LD E, 5
 00101_101_0000101	ADD E, 5    #Incrementando o valor de E em 5
 01101_101_000_0000	LD (E), L   #Carregando valor 0 no endereço da RAM apontado por E
@@ -25,7 +25,7 @@
 11111_000_1111100	JR -4
 
 00001_110_0000010	LD F, 2 	
-00010_111_110_0000	LD H, (F)	
+01110_111_110_0000	LD H, (F)	
 00101_110_0000001	ADD F, 1    #Incrementando o valor de F em 1
 01100_110_0100001	SBC F, 32   #Verifica se estourou o loop
 11111_000_1111100	JR -3		

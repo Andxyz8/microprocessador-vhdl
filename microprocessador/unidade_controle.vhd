@@ -73,7 +73,8 @@ BEGIN
                                               opcode = "00101" OR           -- ADD reg, cte
                                               opcode = "00110" OR           -- ADD regA, regB
                                               opcode = "01001" OR           -- SUB reg, cte
-                                              opcode = "01010")  ELSE '0';  -- SUB regA, regB
+                                              opcode = "01010" OR           -- SUB regA, regB
+                                              opcode = "01110")  ELSE '0';  -- LD regA, (regB)
         
     wren_fc <=  '1' WHEN (opcode = "00111" OR           -- ADC reg, cte
                           opcode = "01000" OR           -- ADC regA, regB
@@ -92,12 +93,13 @@ BEGIN
     slt_reg1    <= "000" WHEN (opcode = "00001" OR                          -- LD reg, cte
                                opcode = "00010" OR                          -- LD regA, regB
                                opcode = "00100" OR                          -- LD reg, (ram_address)
-                               --opcode = "01101" OR                        
+                               opcode = "01110" OR                          -- LD regA, (regB)
                                opcode = "11110" OR                          -- JP abs_address
                                opcode = "11111") ELSE instr(9 DOWNTO 7);    -- JR rel_address
 
     slt_reg2    <= instr(6 DOWNTO 4) WHEN (opcode = "00010" OR              -- LD regA, regB
                                            opcode = "01101" OR              -- LD (regA), regB
+                                           opcode = "01110" OR              -- LD regA, (regB)
                                            opcode = "00110" OR              -- ADD regA, regB
                                            opcode = "01000" OR              -- ADC regA, regB
                                            opcode = "01010" OR              -- SUB regA, regB
@@ -116,7 +118,8 @@ BEGIN
                               opcode = "01010" OR       -- SUB regA, regB
                               opcode = "01100" OR       -- SBC regA, regB
                               opcode = "00011") ELSE    -- LD (ram_address), reg
-                   "10" WHEN (opcode = "00100") ELSE    -- LD reg, (ram_address)
+                   "10" WHEN (opcode = "00100" OR       -- LD reg, (ram_address)
+                              opcode = "01110") ELSE    -- LD regA, (regB)
                    "01";
     
     END ARCHITECTURE a_unidade_controle;

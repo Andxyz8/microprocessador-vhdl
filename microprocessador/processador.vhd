@@ -7,14 +7,13 @@ ENTITY processador IS
     (
         clk                 : IN STD_LOGIC;
         rst                 : IN STD_LOGIC;
-        
         state_tl            : OUT UNSIGNED(1 DOWNTO 0);
         pc_tl               : OUT UNSIGNED(6 DOWNTO 0);
-        
         reg1_out_tl         : OUT SIGNED(15 DOWNTO 0);
         reg2_out_tl         : OUT SIGNED(15 DOWNTO 0);
         ula_out_num_tl      : OUT SIGNED(15 DOWNTO 0);
         ula_out_bool_tl     : OUT STD_LOGIC;
+        primos_tl           : OUT SIGNED(15 DOWNTO 0) := "0000000000000000";
         instr_tl            : OUT UNSIGNED(14 DOWNTO 0)
     );
 END ENTITY processador;
@@ -257,9 +256,10 @@ BEGIN
         instr           => instr_s
     );
 
-    const           <= SIGNED("000000000" & instr_s(6 DOWNTO 0));
-    ram_address_s   <= instr_s(6 DOWNTO 0) WHEN instr_s(14 DOWNTO 10) = "00011" ELSE
-    UNSIGNED(data_read1_s(6 DOWNTO 0)) WHEN instr_s(14 DOWNTO 10) = "01101";
+    const           <=  SIGNED("000000000" & instr_s(6 DOWNTO 0));
+    ram_address_s   <=  instr_s(6 DOWNTO 0) WHEN instr_s(14 DOWNTO 10) = "00011" ELSE
+                        UNSIGNED(data_read1_s(6 DOWNTO 0)) WHEN instr_s(14 DOWNTO 10) = "01101" ELSE
+                        UNSIGNED(data_read2_s(6 DOWNTO 0)) WHEN instr_s(14 DOWNTO 10) = "01110";
 
     state_tl        <= state_s;
     pc_tl           <= pc_dout_s;
@@ -268,6 +268,7 @@ BEGIN
     ula_out_num_tl  <= ula_out_num_s;
     ula_out_bool_tl <= ula_out_bool_s;
     instr_tl        <= instr_s;
+    primos_tl       <= ram_dout_s WHEN select_write_s = "111";
     
 END ARCHITECTURE a_processador;
 
