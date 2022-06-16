@@ -113,6 +113,7 @@ ARCHITECTURE a_processador of processador IS
             state          : IN UNSIGNED (1 DOWNTO 0);
             slt_op_ula     : OUT UNSIGNED (1 DOWNTO 0);
             out_bool_ula   : IN STD_LOGIC ;
+            srcA_ula       : OUT UNSIGNED (1 DOWNTO 0) ;
             srcB_ula       : OUT UNSIGNED (1 DOWNTO 0);
             wr_reg         : OUT STD_LOGIC ;
             slt_reg1       : OUT UNSIGNED (2 DOWNTO 0);
@@ -126,6 +127,7 @@ ARCHITECTURE a_processador of processador IS
     SIGNAL read_rom_s       : STD_LOGIC;
     SIGNAL wr_reg_s         : STD_LOGIC;
     SIGNAL ula_out_bool_s   : STD_LOGIC;
+    SIGNAL ula_srcA_s       : UNSIGNED(1 DOWNTO 0);
     SIGNAL ula_srcB_s       : UNSIGNED(1 DOWNTO 0);
     SIGNAL state_s          : UNSIGNED(1 DOWNTO 0);
     SIGNAL slt_op_ula_s     : UNSIGNED(1 DOWNTO 0);
@@ -139,7 +141,8 @@ ARCHITECTURE a_processador of processador IS
     SIGNAL data_read2_s     : SIGNED(15 DOWNTO 0);
     SIGNAL ula_out_num_s    : SIGNED(15 DOWNTO 0);
     SIGNAL const            : SIGNED(15 DOWNTO 0);
-    SIGNAL mux_out_s        : SIGNED(15 DOWNTO 0);
+    SIGNAL muxA_out_s       : SIGNED(15 DOWNTO 0);
+    SIGNAL muxB_out_s       : SIGNED(15 DOWNTO 0);
     SIGNAL ram_wren_s       : STD_LOGIC;
     SIGNAL ram_address_s    : UNSIGNED(6 DOWNTO 0);
     SIGNAL ram_dout_s       : SIGNED(15 DOWNTO 0);
@@ -166,8 +169,8 @@ BEGIN
     proc_ula: ula
     PORT MAP
     (
-        inA         => data_read1_s,
-        inB         => mux_out_s,
+        inA         => muxA_out_s,
+        inB         => muxB_out_s,
         
         slt_op      => slt_op_ula_s,
 
@@ -175,14 +178,24 @@ BEGIN
         out_bool    => ula_out_bool_s
     );
 
-    proc_mux: mux
+    proc_muxA: mux
+    PORT MAP
+    (
+        slt     => ula_srcA_s,
+        inA     => data_read1_s,
+        inB     => "0000000000000000",
+        inC     => "0000000000000000",
+        out_mux => muxA_out_s
+    );
+    
+    proc_muxB: mux
     PORT MAP
     (
         slt     => ula_srcB_s,
         inA     => data_read2_s,
         inB     => const,
         inC     => ram_dout_s,
-        out_mux => mux_out_s
+        out_mux => muxB_out_s
     );
     
     proc_maq_est: maquina_estados
@@ -235,6 +248,7 @@ BEGIN
         state           => state_s,
         slt_op_ula      => slt_op_ula_s,
         out_bool_ula    => ula_out_bool_s,
+        srcA_ula        => ula_srcA_s,
         srcB_ula        => ula_srcB_s,
         wr_reg          => wr_reg_s,
         slt_reg1        => select_read1_s,
@@ -244,7 +258,8 @@ BEGIN
     );
 
     const           <= SIGNED("000000000" & instr_s(6 DOWNTO 0));
-    ram_address_s   <= instr_s(6 DOWNTO 0);
+    ram_address_s   <= instr_s(6 DOWNTO 0) WHEN instr_s(14 DOWNTO 10) = "00011" ELSE
+    UNSIGNED(data_read1_s(6 DOWNTO 0)) WHEN instr_s(14 DOWNTO 10) = "01101";
 
     state_tl        <= state_s;
     pc_tl           <= pc_dout_s;

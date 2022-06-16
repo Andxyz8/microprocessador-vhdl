@@ -16,6 +16,7 @@ ENTITY unidade_controle IS
         state           : IN UNSIGNED(1 DOWNTO 0);
         slt_op_ula      : OUT UNSIGNED(1 DOWNTO 0);
         out_bool_ula    : IN STD_LOGIC;
+        srcA_ula        : OUT UNSIGNED(1 DOWNTO 0) ;
         srcB_ula        : OUT UNSIGNED(1 DOWNTO 0);
         wr_reg          : OUT STD_LOGIC;
         slt_reg1        : OUT UNSIGNED(2 DOWNTO 0);
@@ -64,7 +65,7 @@ BEGIN
     
     wren_pc     <= '1' WHEN state = "00" ELSE '0';
     
-    wren_ram    <= '1' WHEN state = "10" AND opcode = "00011" ELSE '0';
+    wren_ram    <= '1' WHEN state = "10" AND (opcode = "00011" OR opcode = "01101") ELSE '0';
     
     wr_reg      <= '1' WHEN state = "10" AND (opcode = "00001" OR           -- LD reg, cte
                                               opcode = "00010" OR           -- LD regA, regB
@@ -91,10 +92,12 @@ BEGIN
     slt_reg1    <= "000" WHEN (opcode = "00001" OR                          -- LD reg, cte
                                opcode = "00010" OR                          -- LD regA, regB
                                opcode = "00100" OR                          -- LD reg, (ram_address)
+                               --opcode = "01101" OR                        
                                opcode = "11110" OR                          -- JP abs_address
                                opcode = "11111") ELSE instr(9 DOWNTO 7);    -- JR rel_address
 
     slt_reg2    <= instr(6 DOWNTO 4) WHEN (opcode = "00010" OR              -- LD regA, regB
+                                           opcode = "01101" OR              -- LD (regA), regB
                                            opcode = "00110" OR              -- ADD regA, regB
                                            opcode = "01000" OR              -- ADC regA, regB
                                            opcode = "01010" OR              -- SUB regA, regB
@@ -102,8 +105,12 @@ BEGIN
 
     slt_wr_reg  <= instr(9 DOWNTO 7);
 
-    -- 00 registrador | 01 cte | 10 ram
+    -- 00 registrador1 | 01 e 10 "000000000000000"
+    srcA_ula    <= "01" WHEN(opcode = "01101") ELSE "00";   -- LD (regA), regB
+
+    -- 00 registrador2 | 01 cte | 10 ram
     srcB_ula    <= "00" WHEN (opcode = "00010" OR       -- LD regA, regB
+                              opcode = "01101" OR       -- LD (regA), regB
                               opcode = "00110" OR       -- ADD regA, regB
                               opcode = "01000" OR       -- ADC regA, regB
                               opcode = "01010" OR       -- SUB regA, regB
@@ -111,4 +118,5 @@ BEGIN
                               opcode = "00011") ELSE    -- LD (ram_address), reg
                    "10" WHEN (opcode = "00100") ELSE    -- LD reg, (ram_address)
                    "01";
+    
     END ARCHITECTURE a_unidade_controle;
