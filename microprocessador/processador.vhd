@@ -46,8 +46,18 @@ ARCHITECTURE a_processador of processador IS
             out_bool       : OUT STD_LOGIC
         );
     END COMPONENT;
+
+    COMPONENT mux2x1 IS
+        PORT
+        (
+            slt     : IN STD_LOGIC;
+            inA     : IN SIGNED (15 DOWNTO 0);
+            inB     : IN SIGNED (15 DOWNTO 0);
+            out_mux : OUT SIGNED (15 DOWNTO 0)
+        );
+    END COMPONENT;
     
-    COMPONENT mux IS
+    COMPONENT mux3x1 IS
         PORT
         (
             slt     : IN UNSIGNED(1 DOWNTO 0) ;
@@ -112,7 +122,7 @@ ARCHITECTURE a_processador of processador IS
             state          : IN UNSIGNED (1 DOWNTO 0);
             slt_op_ula     : OUT UNSIGNED (1 DOWNTO 0);
             out_bool_ula   : IN STD_LOGIC ;
-            srcA_ula       : OUT UNSIGNED (1 DOWNTO 0) ;
+            srcA_ula       : OUT STD_LOGIC ;
             srcB_ula       : OUT UNSIGNED (1 DOWNTO 0);
             wr_reg         : OUT STD_LOGIC ;
             slt_reg1       : OUT UNSIGNED (2 DOWNTO 0);
@@ -126,7 +136,7 @@ ARCHITECTURE a_processador of processador IS
     SIGNAL read_rom_s       : STD_LOGIC;
     SIGNAL wr_reg_s         : STD_LOGIC;
     SIGNAL ula_out_bool_s   : STD_LOGIC;
-    SIGNAL ula_srcA_s       : UNSIGNED(1 DOWNTO 0);
+    SIGNAL ula_srcA_s       : STD_LOGIC;
     SIGNAL ula_srcB_s       : UNSIGNED(1 DOWNTO 0);
     SIGNAL state_s          : UNSIGNED(1 DOWNTO 0);
     SIGNAL slt_op_ula_s     : UNSIGNED(1 DOWNTO 0);
@@ -177,17 +187,16 @@ BEGIN
         out_bool    => ula_out_bool_s
     );
 
-    proc_muxA: mux
+    proc_muxA: mux2x1
     PORT MAP
     (
         slt     => ula_srcA_s,
         inA     => data_read1_s,
         inB     => "0000000000000000",
-        inC     => "0000000000000000",
         out_mux => muxA_out_s
     );
     
-    proc_muxB: mux
+    proc_muxB: mux3x1
     PORT MAP
     (
         slt     => ula_srcB_s,

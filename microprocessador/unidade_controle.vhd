@@ -16,7 +16,7 @@ ENTITY unidade_controle IS
         state           : IN UNSIGNED(1 DOWNTO 0);
         slt_op_ula      : OUT UNSIGNED(1 DOWNTO 0);
         out_bool_ula    : IN STD_LOGIC;
-        srcA_ula        : OUT UNSIGNED(1 DOWNTO 0) ;
+        srcA_ula        : OUT STD_LOGIC;
         srcB_ula        : OUT UNSIGNED(1 DOWNTO 0);
         wr_reg          : OUT STD_LOGIC;
         slt_reg1        : OUT UNSIGNED(2 DOWNTO 0);
@@ -58,7 +58,7 @@ BEGIN
     opcode      <= instr(14 DOWNTO 10);
     
     jump_en     <=  "10" WHEN opcode = "11110" ELSE -- JP
-                    "11" WHEN opcode = "11111" AND flag_carry_s = '1' ELSE -- JR
+                    "11" WHEN opcode = "11111" AND flag_carry_s = '1' ELSE -- JR M
                     "00";
 
     read_rom    <= '1' WHEN state = "01" ELSE '0';
@@ -107,8 +107,8 @@ BEGIN
 
     slt_wr_reg  <= instr(9 DOWNTO 7);
 
-    -- 00 registrador1 | 01 e 10 "000000000000000"
-    srcA_ula    <= "01" WHEN(opcode = "01101") ELSE "00";   -- LD (regA), regB
+    -- 0 registrador1 | 1 "000000000000000"
+    srcA_ula    <= '1' WHEN(opcode = "01101") ELSE '0';   -- LD (regA), regB
 
     -- 00 registrador2 | 01 cte | 10 ram
     srcB_ula    <= "00" WHEN (opcode = "00010" OR       -- LD regA, regB

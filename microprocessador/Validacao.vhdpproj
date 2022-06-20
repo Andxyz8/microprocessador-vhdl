@@ -3,7 +3,8 @@
     <File Include="banco_registradores.vhd" />
     <File Include="flag.vhd" />
     <File Include="maquina_estados.vhd" />
-    <File Include="mux.vhd" />
+    <File Include="mux2x1.vhd" />
+    <File Include="mux3x1.vhd" />
     <File Include="processador.vhd" />
     <File Include="processador_tb.vhd" />
     <File Include="program_counter.vhd" />

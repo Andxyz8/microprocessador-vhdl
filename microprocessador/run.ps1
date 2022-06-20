@@ -5,7 +5,8 @@
 ghdl -a flag.vhd
 ghdl -a registrador_16bits.vhd
 ghdl -a banco_registradores.vhd
-ghdl -a mux.vhd
+ghdl -a mux2x1.vhd
+ghdl -a mux3x1.vhd
 ghdl -a ram.vhd
 ghdl -a rom.vhd
 ghdl -a ula.vhd
