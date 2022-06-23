@@ -1,0 +1,8 @@
+# Arquivo do visualizador de ondas GTKWave
+*.ghw
+
+#Arquivo de projeto do VHDPlus
+*.vhdpproj
+
+#Arquivo temp de compilação
+*.cf

@@ -1,7 +1,7 @@
 # Implementação de um Microprocessador (Rabbit 2000) em VHDL
 ## Opcodes, codificação binária e assembly.
 
-| OpCode    | Operação  | Operando1     | Operando2     | Formato               | Descrição | Binário   | Assembly  |
+| OpCode    | Operação  | Operando1     | Operando2     | Formato               | Descrição | Exemplo (binário)   | Exemplo (assembly)  |
 |-----------|-----------|---------------|---------------|-----------------------|-----------|-----------|-----------|
 | 00001     | LD        |reg            | cte           | LD reg, cte           |Carrega a constante cte para o registrador reg | 00001_001_000001 | LD A, 1 |
 | 00010     | LD        |regA           | regB          | LD regA, regB         |Carrega o registrador regB para o registrador regA | 00010_010_001_0000 | LD B, A |
