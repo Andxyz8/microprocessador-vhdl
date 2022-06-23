@@ -5,8 +5,3 @@ opcodes.xlsx
 **/*.vhdpproj
 **/*.cf
 **/*.toml
-
-**/**/*.ghw
-**/**/*.vhdpproj
-**/**/*.cf
-**/**/*.toml
