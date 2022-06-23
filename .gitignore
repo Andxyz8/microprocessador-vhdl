@@ -1,37 +1,12 @@
 # Arquivo da planilha com os opcodes e exemplos
 opcodes.xlsx
 
-microprocessador/*.ghw
-microprocessador/*.vhdpproj
-microprocessador/*.cf
-microprocessador/*.toml
+**/*.ghw
+**/*.vhdpproj
+**/*.cf
+**/*.toml
 
-entregaveis/01-ULA/*.ghw
-entregaveis/01-ULA/*.vhdpproj
-entregaveis/01-ULA/*.cf
-entregaveis/01-ULA/*.toml
-
-entregaveis/02-BancoRegistradores/*.ghw
-entregaveis/02-BancoRegistradores/*.vhdpproj
-entregaveis/02-BancoRegistradores/*.cf
-entregaveis/02-BancoRegistradores/*.toml
-
-entregaveis/03-UnidadeControle/*.ghw
-entregaveis/03-UnidadeControle/*.vhdpproj
-entregaveis/03-UnidadeControle/*.cf
-entregaveis/03-UnidadeControle/*.toml
-
-entregaveis/04-CalculadoraProgramavel/*.ghw
-entregaveis/04-CalculadoraProgramavel/*.vhdpproj
-entregaveis/04-CalculadoraProgramavel/*.cf
-entregaveis/04-CalculadoraProgramavel/*.toml
-
-entregaveis/05-CondicionaisDesvios/*.ghw
-entregaveis/05-CondicionaisDesvios/*.vhdpproj
-entregaveis/05-CondicionaisDesvios/*.cf
-entregaveis/05-CondicionaisDesvios/*.toml
-
-entregaveis/06-RAM/*.ghw
-entregaveis/06-RAM/*.vhdpproj
-entregaveis/06-RAM/*.cf
-entregaveis/06-RAM/*.toml
+**/**/*.ghw
+**/**/*.vhdpproj
+**/**/*.cf
+**/**/*.toml
