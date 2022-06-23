@@ -6,32 +6,32 @@ microprocessador/*.vhdpproj
 microprocessador/*.cf
 microprocessador/*.toml
 
-01-ULA/*.ghw
-01-ULA/*.vhdpproj
-01-ULA/*.cf
-01-ULA/*.toml
+entregaveis/01-ULA/*.ghw
+entregaveis/01-ULA/*.vhdpproj
+entregaveis/01-ULA/*.cf
+entregaveis/01-ULA/*.toml
 
-02-BancoRegistradores/*.ghw
-02-BancoRegistradores/*.vhdpproj
-02-BancoRegistradores/*.cf
-02-BancoRegistradores/*.toml
+entregaveis/02-BancoRegistradores/*.ghw
+entregaveis/02-BancoRegistradores/*.vhdpproj
+entregaveis/02-BancoRegistradores/*.cf
+entregaveis/02-BancoRegistradores/*.toml
 
-03-UnidadeControle/*.ghw
-03-UnidadeControle/*.vhdpproj
-03-UnidadeControle/*.cf
-03-UnidadeControle/*.toml
+entregaveis/03-UnidadeControle/*.ghw
+entregaveis/03-UnidadeControle/*.vhdpproj
+entregaveis/03-UnidadeControle/*.cf
+entregaveis/03-UnidadeControle/*.toml
 
-04-CalculadoraProgramavel/*.ghw
-04-CalculadoraProgramavel/*.vhdpproj
-04-CalculadoraProgramavel/*.cf
-04-CalculadoraProgramavel/*.toml
+entregaveis/04-CalculadoraProgramavel/*.ghw
+entregaveis/04-CalculadoraProgramavel/*.vhdpproj
+entregaveis/04-CalculadoraProgramavel/*.cf
+entregaveis/04-CalculadoraProgramavel/*.toml
 
-05-CondicionaisDesvios/*.ghw
-05-CondicionaisDesvios/*.vhdpproj
-05-CondicionaisDesvios/*.cf
-05-CondicionaisDesvios/*.toml
+entregaveis/05-CondicionaisDesvios/*.ghw
+entregaveis/05-CondicionaisDesvios/*.vhdpproj
+entregaveis/05-CondicionaisDesvios/*.cf
+entregaveis/05-CondicionaisDesvios/*.toml
 
-06-RAM/*.ghw
-06-RAM/*.vhdpproj
-06-RAM/*.cf
-06-RAM/*.toml
+entregaveis/06-RAM/*.ghw
+entregaveis/06-RAM/*.vhdpproj
+entregaveis/06-RAM/*.cf
+entregaveis/06-RAM/*.toml
